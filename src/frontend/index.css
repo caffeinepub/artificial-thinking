@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font Faces ──────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ───────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dark theme by default (forced) */
+    --background: 0.12 0.008 260;
+    --foreground: 0.95 0.01 260;
+
+    --card: 0.16 0.01 260;
+    --card-foreground: 0.95 0.01 260;
+
+    --popover: 0.18 0.012 260;
+    --popover-foreground: 0.95 0.01 260;
+
+    /* Cyan/teal primary accent */
+    --primary: 0.72 0.18 196;
+    --primary-foreground: 0.08 0.02 196;
+
+    --secondary: 0.2 0.012 260;
+    --secondary-foreground: 0.85 0.01 260;
+
+    --muted: 0.18 0.008 260;
+    --muted-foreground: 0.55 0.015 260;
+
+    --accent: 0.22 0.014 260;
+    --accent-foreground: 0.9 0.01 260;
+
+    --destructive: 0.65 0.22 20;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.26 0.012 260;
+    --input: 0.22 0.012 260;
+    --ring: 0.72 0.18 196;
+
+    --chart-1: 0.72 0.18 196;
+    --chart-2: 0.65 0.16 290;
+    --chart-3: 0.60 0.14 160;
+    --chart-4: 0.68 0.20 50;
+    --chart-5: 0.62 0.18 320;
+
+    /* Sidebar slightly different shade */
+    --sidebar: 0.10 0.008 260;
+    --sidebar-foreground: 0.9 0.01 260;
+    --sidebar-primary: 0.72 0.18 196;
+    --sidebar-primary-foreground: 0.08 0.02 196;
+    --sidebar-accent: 0.18 0.012 260;
+    --sidebar-accent-foreground: 0.9 0.01 260;
+    --sidebar-border: 0.22 0.01 260;
+    --sidebar-ring: 0.72 0.18 196;
+
+    /* Custom app tokens */
+    --glow-primary: oklch(0.72 0.18 196 / 0.15);
+    --glow-primary-sm: oklch(0.72 0.18 196 / 0.08);
+    --msg-user-bg: 0.20 0.025 196;
+    --msg-ai-bg: 0.16 0.01 260;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ─── Scrollbar Styling ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.3 0.01 260);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.4 0.015 260);
+}
+
+/* ─── Animations ──────────────────────────────────────────────────── */
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s ease forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease forwards;
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: oklch(var(--primary));
+  animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ─── Message Prose ───────────────────────────────────────────────── */
+.message-content p { margin-bottom: 0.6em; }
+.message-content p:last-child { margin-bottom: 0; }
+.message-content code {
+  background: oklch(0.22 0.015 260);
+  border: 1px solid oklch(0.28 0.015 260);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: "Geist Mono", monospace;
+  font-size: 0.88em;
+  color: oklch(0.78 0.14 196);
+}
+.message-content pre {
+  background: oklch(0.14 0.012 260);
+  border: 1px solid oklch(0.24 0.012 260);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 0.8em 0;
+}
+.message-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: oklch(0.88 0.012 260);
+}
+.message-content ul, .message-content ol {
+  padding-left: 1.4em;
+  margin-bottom: 0.6em;
+}
+.message-content li { margin-bottom: 0.2em; }
+.message-content strong { color: oklch(0.95 0.01 260); font-weight: 600; }
+.message-content h1, .message-content h2, .message-content h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  color: oklch(0.95 0.01 260);
+  margin: 0.8em 0 0.4em;
+}
